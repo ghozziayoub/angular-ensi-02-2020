@@ -1,0 +1,5 @@
+<p>students works!</p>
+<h1>Students :</h1>
+<ul *ngFor="let student of students">
+    <li>{{ student }} <button (click)="deleteStudent(student)">delete</button></li>
+</ul>
