@@ -1,5 +1,57 @@
-<p>students works!</p>
-<h1>Students :</h1>
+
+<app-header></app-header>
+  
+<div class="container">
+    <div class="row">
+        <div class="col-6">
+            <h1>Students List</h1>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-6">
+            <button class="btn btn-primary">Add Student</button>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <div *ngIf="students.length==0" class="alert alert-warning">there is no students</div>
+            <table *ngIf="students.length>0" class="table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>firstname</th>
+                        <th>lastname</th>
+                        <th>cin</th>
+                        <th>adress</th>
+                        <th>phone</th>
+                        <th>email</th>
+                        <th>#</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let student of students;let i = index">
+                        <th>{{i}}</th>
+                        <td>{{student.firstname}}</td>
+                        <td>{{student.lastname}}</td>
+                        <td>{{student.cin}}</td>
+                        <td>{{student.adress}}</td>
+                        <td>{{student.phone}}</td>
+                        <td>{{student.email}}</td>
+                        <td>
+                            <button class="btn btn-info">Details</button>
+                            <button class="btn btn-warning mx-3">Update</button>
+                            <button class="btn btn-danger" (click)="deleteStudent(student)">Delete</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<!--
 <ul *ngFor="let student of students">
     <li>{{ student }} <button (click)="deleteStudent(student)">delete</button></li>
 </ul>
+-->
