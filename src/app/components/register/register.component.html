@@ -1,0 +1,104 @@
+<app-header></app-header>
+
+<div class="container">
+    <form [formGroup]="registerForm" (ngSubmit)="register()">
+        <div class="form-row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="firstname">Firstname</label>
+                    <input type="text" class="form-control" id="firstname" name="firstname" formControlName="firstname">
+                    <div *ngIf="firstname.touched && firstname.invalid">
+                        <small *ngIf="firstname.errors.required" class="form-text text-danger">firstname Required</small>
+                        <small *ngIf="firstname.errors.pattern" class="form-text text-danger">Invalid firstname</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="lastname">Lastname</label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" formControlName="lastname">
+                    <div *ngIf="lastname.touched && lastname.invalid">
+                        <small *ngIf="lastname.errors.required" class="form-text text-danger">lastname Required</small>
+                        <small *ngIf="lastname.errors.pattern" class="form-text text-danger">Invalid lastname</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" class="form-control" id="address" name="address" formControlName="address">
+                    <div *ngIf="address.touched && address.invalid">
+                        <small *ngIf="address.errors.required" class="form-text text-danger">address Required</small>
+                        <small *ngIf="address.errors.pattern" class="form-text text-danger">Invalid address</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" id="phone" name="phone" formControlName="phone">
+                    <div *ngIf="phone.touched && phone.invalid">
+                        <small *ngIf="phone.errors.required" class="form-text text-danger">phone Required</small>
+                        <small *ngIf="phone.errors.pattern" class="form-text text-danger">Invalid phone</small>
+                        <small *ngIf="phone.errors.minlength" class="form-text text-danger">Invalid phone , more than 8</small>
+                        <small *ngIf="phone.errors.maxlength" class="form-text text-danger">Invalid phone , less than 13</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" name="email" formControlName="email">
+                    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    <div *ngIf="email.touched && email.invalid">
+                        <small *ngIf="email.errors.required" class="form-text text-danger">Email Required</small>
+                        <small *ngIf="email.errors.email" class="form-text text-danger">Invalid Email</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="cin">CIN</label>
+                        <input type="text" class="form-control" id="cin" name="cin" formControlName="cin">
+                        <div *ngIf="cin.touched && cin.invalid">
+                            <small *ngIf="cin.errors.required" class="form-text text-danger">cin Required</small>
+                            <small *ngIf="cin.errors.pattern" class="form-text text-danger">Invalid cin</small>
+                            <small *ngIf="cin.errors.minlength" class="form-text text-danger">JUST 8 numbers</small>
+                            <small *ngIf="cin.errors.maxlength" class="form-text text-danger">JUST 8 numbers</small>
+                        </div>
+                    </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" formControlName="password">
+                    <div *ngIf="password.touched && password.invalid">
+                        <small *ngIf="password.errors.required" class="form-text text-danger">Password Required</small>
+                        <small *ngIf="password.errors.minlength" class="form-text text-danger">Invalid Password</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="repassword">Confirm Password</label>
+                    <input type="repassword" class="form-control" id="repassword" name="repassword" formControlName="repassword">
+                    <div *ngIf="repassword.touched && repassword.invalid">
+                        <small *ngIf="repassword.errors.required" class="form-text text-danger">Confirm Password Required</small>
+                    </div>
+                    <small *ngIf="repassword.valid && repassword.value != password.value" class="form-text text-danger">Password and confirm password does not match</small>
+                </div>
+            </div>
+        </div>
+
+
+
+
+        <button type="submit" class="btn btn-primary" [disabled]="registerForm.invalid || repassword.value != password.value">Submit</button>
+    </form>
+</div>

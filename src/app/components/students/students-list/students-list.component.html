@@ -3,21 +3,15 @@
   
 <div class="container">
     <div class="row">
-        <div class="col-6">
+        <div class="col-6 mt-5 mb-3">
             <h1>Students List</h1>
-        </div>
-    </div>
-
-    <div class="row my-3">
-        <div class="col-6">
-            <button class="btn btn-primary">Add Student</button>
         </div>
     </div>
 
     <div class="row">
         <div class="col">
             <div *ngIf="students.length==0" class="alert alert-warning">there is no students</div>
-            <table *ngIf="students.length>0" class="table">
+            <table *ngIf="students.length>0" class="table table-sm">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -27,6 +21,7 @@
                         <th>adress</th>
                         <th>phone</th>
                         <th>email</th>
+                        <th>state</th>
                         <th>#</th>
                     </tr>
                 </thead>
@@ -39,10 +34,12 @@
                         <td>{{student.adress}}</td>
                         <td>{{student.phone}}</td>
                         <td>{{student.email}}</td>
+                        <td><span class="badge badge-pill badge-success">Active</span><span class="badge badge-pill badge-danger">Disabled</span></td>
                         <td>
-                            <button class="btn btn-info">Details</button>
-                            <button class="btn btn-warning mx-3">Update</button>
-                            <button class="btn btn-danger" (click)="deleteStudent(student)">Delete</button>
+                            <button class="btn btn-info mr-2" [routerLink]="['/students/tasks',student.cin]"><i class="fas fa-tasks"></i></button>
+                            <button class="btn btn-success mr-2"><i class="fas fa-user-check"></i></button>
+                            <button class="btn btn-danger mr-2"><i class="fas fa-user-times"></i></button>
+                            <button class="btn btn-danger" (click)="deleteStudent(student)"><i class="far fa-trash-alt"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -50,8 +47,3 @@
         </div>
     </div>
 </div>
-<!--
-<ul *ngFor="let student of students">
-    <li>{{ student }} <button (click)="deleteStudent(student)">delete</button></li>
-</ul>
--->

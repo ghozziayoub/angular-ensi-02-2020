@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-students',
-  templateUrl: './students.component.html',
-  styleUrls: ['./students.component.css']
+  selector: 'app-students-list',
+  templateUrl: './students-list.component.html',
+  styleUrls: ['./students-list.component.css']
 })
-export class StudentsComponent implements OnInit {
+export class StudentsListComponent implements OnInit {
 
   students = [
     {
@@ -24,7 +24,7 @@ export class StudentsComponent implements OnInit {
       phone: '79513893',
       email: 'salahbensalah@yahoo.fr'
 
-    }, 
+    },
     {
       firstname: 'ali',
       lastname: 'ben salah',
@@ -42,12 +42,10 @@ export class StudentsComponent implements OnInit {
       email: 'salahbenali@yahoo.fr'
 
     }];
-
   constructor() { }
 
   ngOnInit(): void {
   }
-
   deleteStudent(student) {
     let indice = this.students.indexOf(student);
     this.students.splice(indice, 1);

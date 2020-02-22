@@ -5,7 +5,6 @@
       <label for="exampleInputEmail1">Email address</label>
       <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="email"
         formControlName="email">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
       <div *ngIf="email.touched && email.invalid">
         <small *ngIf="email.errors.required" class="form-text text-danger">Email Required</small>
         <small *ngIf="email.errors.email" class="form-text text-danger">Invalid Email</small>
@@ -14,12 +13,12 @@
     <div class="form-group">
       <label for="exampleInputPassword1">Password</label>
       <input type="password" class="form-control" id="exampleInputPassword1" name="password" formControlName="password">
-      <div>
-        <small class="form-text text-danger">Password Required</small>
-        <small class="form-text text-danger">Invalid Password</small>
+      <div *ngIf="password.touched && password.invalid">
+        <small *ngIf="password.errors.required"  class="form-text text-danger">Password Required</small>
+        <small *ngIf="password.errors.minlength" class="form-text text-danger">Invalid Password</small>
       </div>
     </div>
 
-    <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Submit</button>
+    <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Login</button>
   </form>
 </div>
