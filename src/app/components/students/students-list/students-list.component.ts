@@ -26,6 +26,23 @@ export class StudentsListComponent implements OnInit {
   deleteStudent(student) {
     let indice = this.students.indexOf(student);
     this.students.splice(indice, 1);
+    let _id = student._id ;
+    this._adminService.deleteStudent(_id).subscribe(
+      result=>{
+        console.log(result);
+      },
+      error=>console.log(error)      
+    )
+  }
+
+  updateState(_id){
+    this._adminService.updateStudentState({studentId:_id}).subscribe(
+      result=>{
+        console.log(result);
+        this.ngOnInit();
+      },
+      error=>console.log(error)      
+    )
   }
 
 }
