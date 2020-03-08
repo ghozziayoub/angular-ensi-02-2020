@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from 'src/app/services/auth.service';
+import { Student } from 'src/app/models/student';
+import { JwtHelperService } from "@auth0/angular-jwt";
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -9,7 +14,7 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private _as:AuthService,private router :Router) {
     let formControls = {
       email: new FormControl('',[
         Validators.required,
@@ -32,7 +37,33 @@ export class LoginComponent implements OnInit {
   }
 
   login(){
-    console.log(this.loginForm.value);
+    let data = this.loginForm.value;
+    let user = new Student(null,null,null,null,null,data.email,data.password);
+
+    this._as.loginUser(user).subscribe(
+      result=>{
+        let token = result.token;
+        
+        localStorage.setItem('token',token);
+        
+        const helper = new JwtHelperService();
+ 
+        const decodedToken = helper.decodeToken(token);
+
+        let role = decodedToken.role;
+        let id = decodedToken.studentId
+        if (role=="admin") {
+          this.router.navigate(['/students']);
+        } else if(role=="student") {
+          this.router.navigate(['/students/tasks/',id]);
+        }
+
+
+      },
+      error=>{
+        console.log(error);
+      }
+    );
     
   }
 

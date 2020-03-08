@@ -10,7 +10,7 @@
 
     <div class="row">
         <div class="col-6 mb-3">
-            <button class="btn btn-info">Add Task</button>
+            <button *ngIf="isStudent" class="btn btn-info">Add Task</button>
         </div>
     </div>
 
@@ -24,7 +24,7 @@
                         <th>Title</th>
                         <th>Date Added</th>
                         <th>Deadline</th>
-                        <th>#</th>
+                        <th *ngIf="isStudent">#</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -33,10 +33,10 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td> 
-                            <button class="btn btn-success mr-2"><i class="far fa-check-square"></i></button>
-                            <button class="btn btn-warning mr-2"><i class="far fa-edit"></i></button>
-                            <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                        <td>
+                            <button *ngIf="isStudent" class="btn btn-success mr-2"><i class="far fa-check-square"></i></button>
+                            <button *ngIf="isStudent" class="btn btn-warning mr-2"><i class="far fa-edit"></i></button>
+                            <button *ngIf="isStudent" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -62,7 +62,7 @@
                         <th>Title</th>
                         <th>Date Added</th>
                         <th>Completed At</th>
-                        <th>#</th>
+                        <th *ngIf="isStudent">#</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,8 +71,8 @@
                         <td></td>
                         <td></td>
                         <td></td>
-                        <td> 
-                            <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                        <td>
+                            <button *ngIf="isStudent" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
                         </td>
                     </tr>
                 </tbody>
