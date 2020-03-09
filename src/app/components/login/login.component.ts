@@ -14,13 +14,24 @@ export class LoginComponent implements OnInit {
 
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder,private _as:AuthService,private router :Router) {
+  constructor(private fb: FormBuilder, private _as: AuthService, private router: Router) {
+    let token = localStorage.getItem('token');
+    if (token) {
+      if (_as.isAdmin()) {
+        router.navigate(['/students'])
+      } else if (_as.isStudent()) {
+        const helper = new JwtHelperService();
+        const studentId = helper.decodeToken(token).studentId;
+        router.navigate(['/students/tasks', studentId])
+      }
+    }
+
     let formControls = {
-      email: new FormControl('',[
+      email: new FormControl('', [
         Validators.required,
         Validators.email
       ]),
-      password: new FormControl('',[
+      password: new FormControl('', [
         Validators.required,
         Validators.minLength(8)
       ])
@@ -29,42 +40,42 @@ export class LoginComponent implements OnInit {
     this.loginForm = fb.group(formControls);
   }
 
-  get email(){return this.loginForm.get('email');}
-  get password(){return this.loginForm.get('password');}
+  get email() { return this.loginForm.get('email'); }
+  get password() { return this.loginForm.get('password'); }
 
 
   ngOnInit(): void {
   }
 
-  login(){
+  login() {
     let data = this.loginForm.value;
-    let user = new Student(null,null,null,null,null,data.email,data.password);
+    let user = new Student(null, null, null, null, null, data.email, data.password);
 
     this._as.loginUser(user).subscribe(
-      result=>{
+      result => {
         let token = result.token;
-        
-        localStorage.setItem('token',token);
-        
+
+        localStorage.setItem('token', token);
+
         const helper = new JwtHelperService();
- 
+
         const decodedToken = helper.decodeToken(token);
 
         let role = decodedToken.role;
         let id = decodedToken.studentId
-        if (role=="admin") {
+        if (role == "admin") {
           this.router.navigate(['/students']);
-        } else if(role=="student") {
-          this.router.navigate(['/students/tasks/',id]);
+        } else if (role == "student") {
+          this.router.navigate(['/students/tasks/', id]);
         }
 
 
       },
-      error=>{
+      error => {
         console.log(error);
       }
     );
-    
+
   }
 
 }

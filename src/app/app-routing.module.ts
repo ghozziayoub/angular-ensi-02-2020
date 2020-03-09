@@ -5,32 +5,46 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { StudentsListComponent } from './components/students/students-list/students-list.component';
 import { StudentTasksComponent } from './components/students/student-tasks/student-tasks.component';
+import { Page401Component } from './components/page401/page401.component';
+import { AdminGuard } from './guards/admin.guard';
+import { AuthGuard } from './guards/auth.guard';
+import { Page404Component } from './components/page404/page404.component';
 
 const routes: Routes = [
   {
-    path:'',
-    component:HomeComponent
+    path: '',
+    component: HomeComponent
   },
   {
-    path : 'login',
-    component:LoginComponent
-  },  
-  {
-    path : 'register',
-    component:RegisterComponent
+    path: 'login',
+    component: LoginComponent
   },
   {
-    path:'students',
-    children:[
+    path: 'register',
+    component: RegisterComponent
+  },
+  {
+    path: 'students',
+    children: [
       {
-        path:'',
-        component:StudentsListComponent
+        path: '',
+        component: StudentsListComponent,
+        canActivate: [AdminGuard]
       },
       {
-        path:'tasks/:idStudent',
-        component:StudentTasksComponent
+        path: 'tasks/:idStudent',
+        component: StudentTasksComponent,
+        canActivate: [AuthGuard]
       }
     ]
+  },
+  {
+    path: 'UNAUTHORIZED',
+    component: Page401Component
+  },
+  {
+    path:'**',
+    component:Page404Component
   }
 ];
 

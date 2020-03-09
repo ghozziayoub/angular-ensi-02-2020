@@ -12,6 +12,8 @@ import { HeaderComponent } from './components/header/header.component';
 import { RegisterComponent } from './components/register/register.component';
 import { StudentsListComponent } from './components/students/students-list/students-list.component';
 import { StudentTasksComponent } from './components/students/student-tasks/student-tasks.component';
+import { Page401Component } from './components/page401/page401.component';
+import { Page404Component } from './components/page404/page404.component';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { StudentTasksComponent } from './components/students/student-tasks/stude
     RegisterComponent,
     StudentsListComponent,
     StudentTasksComponent,
+    Page401Component,
+    Page404Component,
   ],
   imports: [
     BrowserModule,

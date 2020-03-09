@@ -3,6 +3,8 @@ import { FormGroup, FormControl, FormBuilder, Validators } from '@angular/forms'
 import { StudentService } from 'src/app/services/student.service';
 import { Router } from '@angular/router';
 import { Student } from 'src/app/models/student';
+import { AuthService } from 'src/app/services/auth.service';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Component({
   selector: 'app-register',
@@ -13,7 +15,17 @@ export class RegisterComponent implements OnInit {
 
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder,private _studentService:StudentService,private router : Router) {
+  constructor(private fb: FormBuilder,private _studentService:StudentService, private _as: AuthService, private router: Router) {
+    let token = localStorage.getItem('token');
+    if (token) {
+      if (_as.isAdmin()) {
+        router.navigate(['/students'])
+      } else if (_as.isStudent()) {
+        const helper = new JwtHelperService();
+        const studentId = helper.decodeToken(token).studentId;
+        router.navigate(['/students/tasks', studentId])
+      }
+    }
     let formControls = {
       firstname: new FormControl('', [
         Validators.required,
