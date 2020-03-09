@@ -10,33 +10,33 @@
 
     <div class="row">
         <div class="col-6 mb-3">
-            <button *ngIf="isStudent" class="btn btn-info">Add Task</button>
+            <button *ngIf="isStudent" class="btn btn-info" [routerLink]="['/students/tasks/',studentId,'add']">Add
+                Task</button>
         </div>
     </div>
 
     <div class="row">
         <div class="col">
-            <div class="alert alert-warning">There is no task</div>
-            <table class="table table-sm">
+            <div *ngIf="tasksList.length==0" class="alert alert-warning">There is no task</div>
+            <table *ngIf="tasksList.length>0" class="table table-sm">
                 <thead>
                     <tr>
                         <th>#</th>
                         <th>Title</th>
                         <th>Date Added</th>
-                        <th>Deadline</th>
                         <th *ngIf="isStudent">#</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr *ngFor="let task of tasksList;let i = index">
+                        <td>{{i}}</td>
+                        <td>{{task.title}}</td>
+                        <td>{{task.dateAdded | date : 'short'}} </td>
                         <td>
-                            <button *ngIf="isStudent" class="btn btn-success mr-2"><i class="far fa-check-square"></i></button>
-                            <button *ngIf="isStudent" class="btn btn-warning mr-2"><i class="far fa-edit"></i></button>
-                            <button *ngIf="isStudent" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                            <button *ngIf="isStudent" class="btn btn-success mr-2" (click)="endTask(task._id)"><i
+                                    class="far fa-check-square"></i></button>
+                            <button *ngIf="isStudent" class="btn btn-warning mr-2" [routerLink]="['/students/tasks/',studentId,'update',task._id]"><i class="far fa-edit"></i></button>
+                            <button *ngIf="isStudent" class="btn btn-danger" (click)="delete(task._id,i,'task')"><i class="far fa-trash-alt"></i></button>
                         </td>
                     </tr>
                 </tbody>
@@ -54,8 +54,8 @@
 
     <div class="row">
         <div class="col">
-            <div class="alert alert-warning">You have not completed any task yet !</div>
-            <table class="table table-sm">
+            <div *ngIf="doneList.length==0" class="alert alert-warning">You have not completed any task yet !</div>
+            <table *ngIf="doneList.length>0" class="table table-sm">
                 <thead>
                     <tr>
                         <th>#</th>
@@ -66,13 +66,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                    <tr *ngFor="let done of doneList;let i = index">
+                        <td>{{i}}</td>
+                        <td>{{done.title}}</td>
+                        <td>{{done.dateAdded | date : 'short'}} </td>
+                        <td>{{done.completedAt | date : 'short'}}</td>
                         <td>
-                            <button *ngIf="isStudent" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                            <button *ngIf="isStudent" class="btn btn-danger" (click)="delete(done._id,i,'done')"><i class="far fa-trash-alt"></i></button>
                         </td>
                     </tr>
                 </tbody>

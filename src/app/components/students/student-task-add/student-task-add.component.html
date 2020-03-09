@@ -1,0 +1,15 @@
+<app-header></app-header>
+<div class="container">
+    <form [formGroup]="addTaskForm" (ngSubmit)="addTask()">
+
+        <div class="form-group">
+            <label for="title">Title :</label>
+            <input type="text" class="form-control" id="title" name="title" formControlName="title">
+            <div *ngIf="title.touched && title.invalid">
+                <small *ngIf="title.errors.required" class="form-text text-danger">title Required</small>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary" [disabled]="addTaskForm.invalid">Add Task</button>
+    </form>
+</div>

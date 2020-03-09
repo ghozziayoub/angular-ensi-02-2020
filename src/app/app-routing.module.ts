@@ -9,6 +9,8 @@ import { Page401Component } from './components/page401/page401.component';
 import { AdminGuard } from './guards/admin.guard';
 import { AuthGuard } from './guards/auth.guard';
 import { Page404Component } from './components/page404/page404.component';
+import { StudentTaskAddComponent } from './components/students/student-task-add/student-task-add.component';
+import { StudentTaskUpdateComponent } from './components/students/student-task-update/student-task-update.component';
 
 const routes: Routes = [
   {
@@ -35,6 +37,14 @@ const routes: Routes = [
         path: 'tasks/:idStudent',
         component: StudentTasksComponent,
         canActivate: [AuthGuard]
+      },
+      {
+        path: 'tasks/:idStudent/add',
+        component: StudentTaskAddComponent
+      },
+      {
+        path: 'tasks/:idStudent/update/:idTask',
+        component: StudentTaskUpdateComponent
       }
     ]
   },
@@ -43,8 +53,8 @@ const routes: Routes = [
     component: Page401Component
   },
   {
-    path:'**',
-    component:Page404Component
+    path: '**',
+    component: Page404Component
   }
 ];
 

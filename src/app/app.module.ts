@@ -14,6 +14,8 @@ import { StudentsListComponent } from './components/students/students-list/stude
 import { StudentTasksComponent } from './components/students/student-tasks/student-tasks.component';
 import { Page401Component } from './components/page401/page401.component';
 import { Page404Component } from './components/page404/page404.component';
+import { StudentTaskAddComponent } from './components/students/student-task-add/student-task-add.component';
+import { StudentTaskUpdateComponent } from './components/students/student-task-update/student-task-update.component';
 
 
 @NgModule({
@@ -27,6 +29,8 @@ import { Page404Component } from './components/page404/page404.component';
     StudentTasksComponent,
     Page401Component,
     Page404Component,
+    StudentTaskAddComponent,
+    StudentTaskUpdateComponent,
   ],
   imports: [
     BrowserModule,
