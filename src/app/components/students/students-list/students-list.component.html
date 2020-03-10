@@ -1,6 +1,6 @@
+<app-header>
+</app-header>
 
-<app-header></app-header>
-  
 <div class="container-fluid">
     <div class="row">
         <div class="col-6 mt-5 mb-3">
@@ -39,7 +39,7 @@
                             <span *ngIf="!student.state" class="badge badge-pill badge-danger">Disabled</span>
                         </td>
                         <td>
-                            <button class="btn btn-info mr-2" [routerLink]="['/students/tasks',student.cin]"><i class="fas fa-tasks"></i></button>
+                            <button class="btn btn-info mr-2" [routerLink]="['/students/tasks',student._id]"><i class="fas fa-tasks"></i></button>
                             <button *ngIf="!student.state" (click)="updateState(student._id)" class="btn btn-success mr-2"><i class="fas fa-user-check"></i></button>
                             <button *ngIf="student.state" (click)="updateState(student._id)" class="btn btn-danger mr-2"><i class="fas fa-user-times"></i></button>
                             <button class="btn btn-danger" (click)="deleteStudent(student)"><i class="far fa-trash-alt"></i></button>

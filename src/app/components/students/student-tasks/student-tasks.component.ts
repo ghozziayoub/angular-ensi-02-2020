@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TaskService } from 'src/app/services/task.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-student-tasks',
@@ -16,13 +17,18 @@ export class StudentTasksComponent implements OnInit {
   isStudent: Boolean;
   studentId: String;
 
-  constructor(private _as: AuthService, private _ts: TaskService) { }
+  constructor(private _as: AuthService, private _ts: TaskService,private route:ActivatedRoute) { }
 
   ngOnInit(): void {
 
     let token = localStorage.getItem('token');
     const helper = new JwtHelperService();
-    this.studentId = helper.decodeToken(token).studentId;
+    if (helper.decodeToken(token).role == "student") {
+      this.studentId = helper.decodeToken(token).studentId;
+    } else {
+      this.studentId = this.route.snapshot.paramMap.get('idStudent');
+    }
+
     this.isStudent = this._as.isStudent();
 
     this.getAllTasks();
